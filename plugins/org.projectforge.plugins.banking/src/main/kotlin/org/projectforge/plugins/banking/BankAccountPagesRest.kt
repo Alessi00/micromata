@@ -112,6 +112,12 @@ class BankAccountPagesRest : AbstractDTOPagesRest<BankAccountDO, BankAccount, Ba
         i18nKey = "plugins.banking.account.record.title.list",
         url = PagesResolver.getListPageUrl(BankAccountRecordPagesRest::class.java),
       )
+    ).add(
+      MenuItem(
+        "banking.account.balance.list",
+        i18nKey = "plugins.banking.account.balance.title.list",
+        url = PagesResolver.getListPageUrl(BankAccountBalancePagesRest::class.java),
+      )
     )
   }
 
@@ -174,7 +180,10 @@ class BankAccountPagesRest : AbstractDTOPagesRest<BankAccountDO, BankAccount, Ba
       MenuItem(
         "banking.account.record.list",
         i18nKey = "plugins.banking.account.record.title.list",
-        url = PagesResolver.getListPageUrl(BankAccountRecordPagesRest::class.java, params = mapOf("bankAccount" to dto.id)),
+        url = PagesResolver.getListPageUrl(
+          BankAccountRecordPagesRest::class.java,
+          params = mapOf("bankAccount" to dto.id)
+        ),
       )
     )
     return LayoutUtils.processEditPage(layout, dto, this)

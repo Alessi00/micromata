@@ -63,7 +63,7 @@ open class BankAccountBalanceDO : DefaultBaseDO() {
   @get:Column(name = "amount", scale = 2, precision = 12)
   open var amount: BigDecimal? = null
 
-  @PropertyInfo(i18nKey = "plugins.banking.account.record.date")
+  @PropertyInfo(i18nKey = "date")
   @Field(analyze = Analyze.NO)
   @get:Column(name = "date_col")
   open var date: LocalDate? = null
