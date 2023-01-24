@@ -30,6 +30,7 @@ import org.projectforge.rest.config.RestUtils
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
+import org.springframework.web.filter.DelegatingFilterProxy
 import java.io.File
 import javax.servlet.FilterRegistration
 import javax.servlet.ServletContext

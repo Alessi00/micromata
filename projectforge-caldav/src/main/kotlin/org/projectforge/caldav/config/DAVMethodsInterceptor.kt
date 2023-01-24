@@ -43,7 +43,7 @@ class DAVMethodsInterceptor : HandlerInterceptorAdapter() {
     request: HttpServletRequest,
     response: HttpServletResponse, handler: Any
   ): Boolean {
-    return !handledByMiltonFilter(request) // Support PROPFIND, PROPPATCH etc.
+    return !handledByMiltonFilter(request.method, request.requestURI) // Support PROPFIND, PROPPATCH etc.
   }
 
   companion object {
@@ -51,19 +51,19 @@ class DAVMethodsInterceptor : HandlerInterceptorAdapter() {
      * @return true if [PFMiltonInit.available] and given method is in list "PROPFIND", "PROPPATCH", "OPTIONS" (with /users/...), "REPORT".
      * Otherwise false.
      */
-    fun handledByMiltonFilter(request: HttpServletRequest): Boolean {
+    fun handledByMiltonFilter(method: String, uri: String): Boolean {
       if (!PFMiltonInit.available) {
         return false
       }
-      val method = request.method
+      // val method = request.method
       if (method == "PROPFIND") {
-        val uri = request.requestURI
+        // val uri = request.requestURI
         log.info("PROPFIND call detected: $uri")
         // All PROPFIND's will be handled by Milton.
         return true
       }
       if (METHODS.contains(method)) {
-        val uri = request.requestURI
+        // val uri = request.requestURI
         // We may add uri pattern later ("/", "/principals/*", "/users/*").
         return uri.matches("/+users.*".toRegex())
       }
